@@ -330,16 +330,23 @@ void Siec::algorithm() {
 
 		beg.setWartoscCechy(1000);
 
-		//1
 		do {
 			temp = cechowanie(beg);
 			przeplyw(temp);
-			wypisz();
-			if (visited[getIndeksWierzcholka(getUjscie().getName())])
+			if (visited[getIndeksWierzcholka(getUjscie().getName())]) {
+				wypisz();
 				wyczyscKrawedzie();
+			}
+				
 		} while (visited[getIndeksWierzcholka(getUjscie().getName())]);
 
-		
+		cout << "Maksymalne skojarzenie: " << endl;
+		for (int i = 0; i < krawedzie.size(); i++) {
+			if (krawedzie[i].getAktualnaPrzepustowosc() == 1 && krawedzie[i].getWychodzacy().getName() != getZrodlo().getName() && krawedzie[i].getWchodzacy().getName() != getUjscie().getName()) {
+				cout << "{" << krawedzie[i].getWychodzacy().getName() << "," << krawedzie[i].getWchodzacy().getName() << "}"<< endl;
+			}
+		}
+
 	} 
 	else cout << "Nie jest dwudzielny" << endl;
 
